@@ -1,0 +1,59 @@
+{
+    "dev tools": [
+        {
+            "name": "Vs code",
+            "information": "Visual Studio Code is a popular code editor with extensive support for web development. It offers a wide range of extensions and features, making it highly customizable and suitable for various programming languages.",
+            "download": "https://code.visualstudio.com/download",
+            "website": "https://code.visualstudio.com/"
+        },
+        {
+            "name": "Atom",
+            "information": "Atom is a flexible and hackable text editor with a large community of developers creating plugins to enhance its functionality. It provides an easy-to-use interface for web development and is well-suited for frontend and backend coding.",
+            "download": "https://atom.en.softonic.com/download",
+            "website": "https://atom.en.softonic.com/"
+        },
+        {
+            "name": "Brackets",
+            "information": "Brackets is an open-source code editor that is specifically targeted at web development. It has features like live preview and inline editing, which make it convenient for working with HTML, CSS, and JavaScript.",
+            "download": "https://brackets.io/",
+            "website": "https://brackets.io/"
+        },
+        {
+            "name": "online html validator",
+            "information": "Online HTML validators are web-based tools that help check the validity of HTML code, ensuring it adheres to web standards. They can identify syntax errors and improve overall code quality.",
+            "download": "https://www.freeformatter.com/html-validator.html",
+            "website": "https://www.freeformatter.com/html-validator.html"
+        },
+        {
+            "name": "webstorm",
+            "information": "WebStorm is a powerful IDE designed for professional web development. It comes with intelligent code assistance, a built-in debugger, and integration with various frontend frameworks, making it suitable for large-scale projects.",
+            "download": "https://www.jetbrains.com/webstorm/download/#section=windows",
+            "website": "https://www.jetbrains.com/webstorm/"
+        },
+        {
+            "name": "Bootstrap",
+            "information": "Bootstrap is a popular CSS framework that provides a collection of pre-designed CSS and JavaScript components. It helps developers quickly build responsive and visually appealing websites.",
+            "download": "https://getbootstrap.com/docs/5.0/getting-started/download/",
+            "website": "https://getbootstrap.com/"
+        },
+        {
+            "name": "Tailwind CSS",
+            "information": "Tailwind CSS is a utility-first CSS framework that enables developers to quickly create custom designs without writing custom CSS. It's highly flexible and focuses on providing low-level utility classes.",
+            "download": "https://tailwindcss.com/docs/installation",
+            "website": "https://tailwindcss.com/"
+        },
+        {
+            "name": "Materialize",
+            "information": "Materialize is a modern CSS framework based on Google's Material Design principles. It offers a set of CSS components and JavaScript plugins to create sleek and responsive user interfaces.",
+            "download": "https://materializecss.com/getting-started.html",
+            "website": "https://materializecss.com/"
+        },
+        {
+            "name": "Semantic UI",
+            "information": "Semantic UI is an intuitive CSS framework that focuses on human-friendly HTML. It provides a comprehensive set of UI components and is easy to integrate with various JavaScript frameworks.",
+            "download": "https://semantic-ui.com/introduction/getting-started.html",
+            "website": "https://semantic-ui.com/"
+        }
+      
+    ]
+}
