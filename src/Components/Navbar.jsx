@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Text,HStack } from '@chakra-ui/react';
+import { Flex, Text,HStack, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
@@ -23,9 +23,12 @@ export default function Navbar() {
                         <Text fontSize="sm">Developer Tools</Text>
                     </Link>
                 </HStack>
-             <HStack px={10}>
+             <HStack px={10} gap="2rem">
              <Link to="/login">
                     <Text>Login</Text>
+                </Link>
+                <Link to="/Signup">
+                   <Button colorScheme="gray" size="sm" borderRadius="20px"> <Text>Signin</Text></Button>
                 </Link>
              </HStack>
         </Flex>

@@ -7,7 +7,7 @@ import { Box } from '@chakra-ui/react';
 import FrontendRoadmap from './Roadmaps/FrontendRoadmap';
 import Loginpage from './pages/Loginpage';
 import Navbar from './Components/Navbar';
-
+import Signup from './pages/Signup';
 function App() {
     return (
         <ChakraProvider>
@@ -18,6 +18,8 @@ function App() {
                         <Route path='/' element={<Home />} />
                         <Route path='/frontend' element={<FrontendRoadmap />} />
                         <Route path='/login' element={<Loginpage />} />
+                        <Route path='/Signup' element={<Signup />} />
+
                     </Routes>
                 </Box>
             </BrowserRouter>
