@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Box, Button, Checkbox, Flex, Popover, PopoverArrow, PopoverContent, PopoverHeader, PopoverTrigger, Text, PopoverBody } from '@chakra-ui/react';
-import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 import { DownIcon } from '../Roadmaps/svgs/Svg';
 import { Spinner } from '@chakra-ui/react';
@@ -10,15 +9,14 @@ export default function FrontendRoadmap() {
     const [selectedCourse, setSelectedCourse] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => { 
-        axios
-            .get('/api/detailedFrontend/')
-            .then((response) => {
-                console.log(response.data);
-                setSelectedCourse(response.data); 
+    useEffect(() => {
+        fetch('/api/detailedFrontend/')
+            .then(response => response.json())
+            .then(data => {
+                setSelectedCourse(data);
                 setLoading(false);
             })
-            .catch((error) => {
+            .catch(error => {
                 console.log(error);
             });
     }, []);
