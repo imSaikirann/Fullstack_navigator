@@ -1,30 +1,65 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
+import { Box, Button, Input, Center, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 import axios from 'axios';
-import { Box, Button, Input, Center } from '@chakra-ui/react';
 import { UserContext } from '../Context/UserContext';
 
 export default function Loginpage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const { setUserData } = useContext(UserContext);
+    const { setUserData } = React.useContext(UserContext);
 
-    const handleLogin = () => {
-        axios.post('/api/user/login', { email, password })
+    const handleLogin = (values, actions) => { 
+        axios.post('/api/user/login', values)
             .then((response) => {
                 console.log(response.data);
                 setUserData(response.data);
+            })
+            .finally(() => {
+                actions.setSubmitting(false);
             });
     };
-
+ 
     return (
-        <Box className='home'>
         <Center h="100vh">
-            <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" bg="#1A192F" border="none" color="white">
-                <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} mb={3} />
-                <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} mb={3} />
-                <Button onClick={handleLogin} colorScheme="blue">Login</Button>
+            <Box p={10} w="450px" h="300px" shadow="md" borderWidth="1px" borderRadius="md" bg="#1A192F" border="none" color="white">
+                <Formik
+                    initialValues={{
+                        email: '',
+                        password: ''
+                    }}
+                    validationSchema={Yup.object({
+                        email: Yup.string().email('Invalid email').required('Required'),
+                        password: Yup.string().required('Required')
+                    })}
+                    onSubmit={(values, actions) => {
+                        handleLogin(values, actions);
+                    }}
+                >
+                    <Form style={{ textAlign: 'center' }}>
+                        <Field name="email">
+                            {({ field, form }) => (
+                                <FormControl isInvalid={form.errors.email && form.touched.email}>
+                                    <FormLabel htmlFor="email">Email</FormLabel>
+                                    <Input {...field} id="email" placeholder="Email" />
+                                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                                </FormControl>
+                            )}
+                        </Field>
+                        <Field name="password">
+                            {({ field, form }) => (
+                                <FormControl isInvalid={form.errors.password && form.touched.password}>
+                                    <FormLabel htmlFor="password">Password</FormLabel>
+                                    <Input {...field} type="password" id="password" placeholder="Password" />
+                                    <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                                </FormControl>
+                            )}
+                        </Field>
+                        <Button mt={4}  w="370px" type="submit">
+                            Login
+                        </Button>
+                    </Form>
+                </Formik>
             </Box>
         </Center>
-        </Box>
     );
 }
