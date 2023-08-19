@@ -16,7 +16,7 @@ function App() {
                 <Box className='content'>
                     <Routes>
                         <Route path='/' element={<Home />} />
-                        <Route path='/frontend' element={<FrontendRoadmap />} />
+                        <Route path='/detailedFrontend' element={<FrontendRoadmap />} />
                         <Route path='/login' element={<Loginpage />} />
                         <Route path='/Signup' element={<Signup />} />
 

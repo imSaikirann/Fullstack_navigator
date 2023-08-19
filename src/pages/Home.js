@@ -9,7 +9,7 @@ export default function Home() {
             <TypeWriter/>
             <Center h="100vh">
                 <Box>
-                    <Button as={Link} to='/frontend'>Frontend Roadmap</Button>
+                    <Button as={Link} to='/detailedFrontend'>Frontend Roadmap</Button>
                 </Box>
             </Center>
         </div>
