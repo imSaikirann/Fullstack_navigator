@@ -13,7 +13,7 @@ export default function FrontendRoadmap() {
     useEffect(() => {
         async function fetchData() { 
             try{
-        const res = await fetch('/api/detailedFrontend/')
+        const res = await fetch('/api/detailedFrontend')
         const data = await res.json()
         setSelectedCourse(data)
         setLoading(false)
