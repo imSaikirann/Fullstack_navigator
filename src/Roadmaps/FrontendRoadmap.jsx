@@ -19,7 +19,6 @@ export default function FrontendRoadmap() {
         setLoading(false)
         console.log(data)
         } 
-    
         catch (error)
         {
             console.log(error)
