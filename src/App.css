@@ -25,10 +25,11 @@ header .con{
 }
 .content
 {
-  padding-Top: 60px;
+  padding-Top: 64px;
 }
 .home{
   background-color:#CED4DA;
+  font-family: Raleway;
 }
 
 .App-header {

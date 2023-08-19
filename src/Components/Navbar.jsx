@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     return (
-        <Flex bgColor="#1A192F" color="white" height="60px" width="100%" position="fixed" alignItems="center" justify="space-between" zIndex={999}>
+        <Flex bgColor="#1A192F" color="white" height="65px" width="100%" position="fixed" alignItems="center" justify="space-between" zIndex={999}>
             <HStack  px={10}>
                 <Link to="/">
                     <Text fontSize="xl" fontWeight="bold">

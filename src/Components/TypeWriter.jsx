@@ -17,7 +17,7 @@ export default function TypeWriter() {
         <Box as="span" color="purple">
           {text}
         </Box>
-        <Cursor />
+        <Cursor cursorStyle="|" />
       </Heading>
     </Box>
   );

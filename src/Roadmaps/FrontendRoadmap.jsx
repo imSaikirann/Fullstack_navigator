@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Box, Button, Checkbox, Flex, Popover, PopoverArrow, PopoverContent, PopoverHeader, PopoverTrigger, Text, PopoverBody } from '@chakra-ui/react';
+import { Box,Progress, Button, Checkbox, Flex, Popover, PopoverArrow, PopoverContent, PopoverHeader, PopoverTrigger, Text, PopoverBody, Center } from '@chakra-ui/react';
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 import { DownIcon } from '../Roadmaps/svgs/Svg';
@@ -10,17 +10,22 @@ export default function FrontendRoadmap() {
     const [selectedCourse, setSelectedCourse] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => { 
-        axios
-            .get('/api/detailedFrontend/')
-            .then((response) => {
-                console.log(response.data);
-                setSelectedCourse(response.data); 
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    useEffect(() => {
+        async function fetchData() { 
+            try{
+        const res = await fetch('/api/detailedFrontend/')
+        const data = await res.json()
+        setSelectedCourse(data)
+        setLoading(false)
+        console.log(data)
+        } 
+    
+        catch (error)
+        {
+            console.log(error)
+        }
+    }
+    fetchData();
     }, []);
 
     const isCourseCompleted = (courseName) => {
@@ -59,18 +64,26 @@ export default function FrontendRoadmap() {
         }
     };
 
-    const progressValue = ((userData?.Data?.completedLanguages.length) / 2) * 100 || 0;
+    const progressValue = ((userData?.Data?.completedLanguages.length) / 25) * 100 || 0;
     console.log(progressValue)
 
     return (
         <>
-        <Flex className='home' >
-            <Box width="100%" padding="1rem 2rem">
+        <Flex  >
+            <Box width="50%" padding="1rem 2rem">
                 <Text fontSize='xl' fontWeight="bold">Frontend Roadmap</Text>
-            </Box>            
+            </Box>       
+            <Box width="50%" padding="1rem 1rem">
+            <Progress borderRadius="10px" colorScheme="purple" transition="width 0.3 ease-in-out" h="20px" value={progressValue}  />
+            </Box>     
+           
+          
         </Flex>
-
-        <Box className='home' display="flex" flexDirection="column" alignItems="center" height="90rem">
+      
+    
+        
+        <Center>
+        <Box className='home' display="flex"  flexDirection="column" alignItems="center" height="90rem" padding="2rem" width="90%" borderRadius="10px" textAlign="center" >
             {isLoading ? (
                 <Box mt="4" display="flex" justifyContent="center" alignItems="center">
                     <Spinner size="md" />
@@ -138,6 +151,7 @@ export default function FrontendRoadmap() {
                 </>
             )}
         </Box>
+        </Center>
         </>
     );
 }
