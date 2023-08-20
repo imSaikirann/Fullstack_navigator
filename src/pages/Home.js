@@ -5,8 +5,8 @@ import TypeWriter from '../Components/TypeWriter';
 
 export default function Home() {
     return (
-        <div class="home" >
-            <TypeWriter/>
+        <div className="home" >
+            <TypeWriter/> 
             <Center h="100vh">
                 <Box>
                     <Button as={Link} to='/detailedFrontend'>Frontend Roadmap</Button>
