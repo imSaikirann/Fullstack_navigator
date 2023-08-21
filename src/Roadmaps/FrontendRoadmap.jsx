@@ -11,20 +11,18 @@ export default function FrontendRoadmap() {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchData() { 
-            try{
-        const res = await fetch('/api/detailedFrontend')
-        const data = await res.json()
-        setSelectedCourse(data)
-        setLoading(false)
-        console.log(data)
-        } 
-        catch (error)
-        {
-            console.log(error)
+        async function fetchData() {
+            try {
+                const res = await axios.get('/api/detailedFrontend'); // Use axios to make GET request
+                const data = res.data; // Extract data from response
+                setSelectedCourse(data);
+                setLoading(false);
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
-    fetchData();
+        fetchData();
     }, []);
 
     const isCourseCompleted = (courseName) => {
