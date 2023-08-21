@@ -1,5 +1,5 @@
 {
-  "proxy": "https://back-4m1g.onrender.com/api",
+  "proxy": "https://back-4m1g.onrender.com/api/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
