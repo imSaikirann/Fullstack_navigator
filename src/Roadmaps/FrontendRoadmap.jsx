@@ -5,13 +5,7 @@ import {
   Button,
   Checkbox,
   Flex,
-  Popover,
-  PopoverArrow,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
   Text,
-  PopoverBody,
   Center,
 } from '@chakra-ui/react';
 import axios from 'axios';
