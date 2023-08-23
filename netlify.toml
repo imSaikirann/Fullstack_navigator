@@ -1,7 +1,8 @@
-[build]
-command = "npm run build"
-publish = "build"
-
 [[redirects]]
 from = "/api/*"
 to = "https://backnew-cbrd.onrender.com/api/:splat"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
