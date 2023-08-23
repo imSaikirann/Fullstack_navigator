@@ -4,4 +4,4 @@ publish = "build"
 
 [[redirects]]
 from = "/api/*"
-to = "https://backend-koui.onrender.com/api/:splat"
+to = "https://backnew-cbrd.onrender.com/api/:splat"
