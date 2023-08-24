@@ -1,3 +1,5 @@
 /api/* https://backnew-cbrd.onrender.com/api/:splat 200!
 /api/user/login https://backnew-cbrd.onrender.com/api/user/login 200!
+/api/user/login https://backnew-cbrd.onrender.com/api/user/signin 200!
+
 /* /index.html 200
