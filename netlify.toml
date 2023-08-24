@@ -1,5 +1,5 @@
 [[redirects]]
-from = "/api/user/logon"
+from = "/api/user/login"
 to = "https://backnew-cbrd.onrender.com/api/user/login"
 
 [[redirects]]
