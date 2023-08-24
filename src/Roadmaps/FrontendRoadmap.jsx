@@ -11,27 +11,27 @@ import {
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 import { Spinner } from '@chakra-ui/react';
+import { Link,useNavigate } from 'react-router-dom';
 
 export default function FrontendRoadmap() {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData, setResource } = useContext(UserContext);
 
   const [selectedCourse, setSelectedCourse] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData() {
       try {
         const timestamp = Date.now();
         const res = await axios.get(`/api/detailedFrontend?timestamp=${timestamp}`);
-        console.log('Response Data:', res.data);
-        console.log('Full Response:', res);
         setSelectedCourse(res.data); // Update selectedCourse with fetched data
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
-    } 
-    
+    }
+
     fetchData();
   }, []);
 
@@ -39,17 +39,17 @@ export default function FrontendRoadmap() {
     return userData?.Data?.completedLanguages?.includes(courseName) || false;
   };
 
-  const handleCheckboxChange = async (courseName) => {
+  const handleCheckboxChange = async (course) => {
     try {
       const updatedCompletedLanguages = [...userData.Data.completedLanguages];
 
-      if (isCourseCompleted(courseName)) {
-        const index = updatedCompletedLanguages.indexOf(courseName);
+      if (isCourseCompleted(course.name)) {
+        const index = updatedCompletedLanguages.indexOf(course.name);
         if (index !== -1) {
           updatedCompletedLanguages.splice(index, 1);
         }
       } else {
-        updatedCompletedLanguages.push(courseName);
+        updatedCompletedLanguages.push(course.name);
       }
 
       const updatedUserData = {
@@ -70,10 +70,12 @@ export default function FrontendRoadmap() {
     }
   };
 
- 
-  
+  const handleResouce = (course) => {
+    console.log(course)
+    setResource(course);
+  };
+
   const progressValue = ((userData?.Data?.completedLanguages.length) / 25) * 100 || 0;
-  console.log(progressValue);
 
   return (
     <>
@@ -121,13 +123,16 @@ export default function FrontendRoadmap() {
                           colorScheme="purple"
                           size="lg"
                           isChecked={isCourseCompleted(course.name)}
-                          onChange={() => handleCheckboxChange(course.name)}
+                          onChange={userData ? () => handleCheckboxChange(course):()=>navigate('/login')}
+                          
                         />
-                        <Button size="md" w="175px"  >
+                       <Link to={`/frontend/${course.name}`} >
+                       <Button size="md" w="175px" onClick={() => handleResouce(course)}>
                           <Text fontSize="small" color="#1A192F" fontFamily="sans-serif">
                             {course.name}
                           </Text>
                         </Button>
+                       </Link>
                       </Flex>
                     </Flex>
                   </Box>

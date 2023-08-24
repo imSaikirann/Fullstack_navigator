@@ -8,17 +8,23 @@ import FrontendRoadmap from './Roadmaps/FrontendRoadmap';
 import Loginpage from './pages/Loginpage';
 import Navbar from './Components/Navbar';
 import Signup from './pages/Signup';
+import Resource from './pages/Resource'
+import { UserContext } from './Context/UserContext';
+
 function App() {
+  const { resource } = React.useContext(UserContext);
+
     return (
         <ChakraProvider>
-            <BrowserRouter>
+            <BrowserRouter> 
                 <Navbar />
                 <Box className='content'>
                     <Routes>
                         <Route path='/' element={<Home />} />
-                        <Route path='/detailedFrontend' element={<FrontendRoadmap />} />
+                        <Route path='/frontend' element={<FrontendRoadmap />} />
                         <Route path='/login' element={<Loginpage />} />
                         <Route path='/Signup' element={<Signup />} />
+                        <Route path={`/frontend/${resource && resource.name}`} element={<Resource />} />
 
 
                     </Routes>
