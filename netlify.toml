@@ -1,4 +1,8 @@
 [[redirects]]
+from = "/api/user/logon"
+to = "https://backnew-cbrd.onrender.com/api/user/login"
+
+[[redirects]]
 from = "/api/*"
 to = "https://backnew-cbrd.onrender.com/api/:splat"
 

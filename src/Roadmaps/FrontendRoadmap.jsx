@@ -14,6 +14,7 @@ import { Spinner } from '@chakra-ui/react';
 
 export default function FrontendRoadmap() {
   const { userData, setUserData } = useContext(UserContext);
+
   const [selectedCourse, setSelectedCourse] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -29,7 +30,7 @@ export default function FrontendRoadmap() {
       } catch (error) {
         console.log(error);
       }
-    }
+    } 
     
     fetchData();
   }, []);
@@ -69,6 +70,8 @@ export default function FrontendRoadmap() {
     }
   };
 
+ 
+  
   const progressValue = ((userData?.Data?.completedLanguages.length) / 25) * 100 || 0;
   console.log(progressValue);
 
@@ -120,7 +123,7 @@ export default function FrontendRoadmap() {
                           isChecked={isCourseCompleted(course.name)}
                           onChange={() => handleCheckboxChange(course.name)}
                         />
-                        <Button size="md" w="175px">
+                        <Button size="md" w="175px"  >
                           <Text fontSize="small" color="#1A192F" fontFamily="sans-serif">
                             {course.name}
                           </Text>
