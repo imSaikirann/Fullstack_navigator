@@ -1,14 +1,14 @@
 [[redirects]]
 from = "/api/user/login"
-to = "https://backnew-cbrd.onrender.com/api/user/login"
+to = "https://fullstack-snei.onrender.com/api/user/login"
 
 [[redirects]]
 from = "/api/user/signin"
-to = "https://backnew-cbrd.onrender.com/api/user/signin"
+to = "https://fullstack-snei.onrender.com/api/user/signin"
 
 [[redirects]]
 from = "/api/*"
-to = "https://backnew-cbrd.onrender.com/api/:splat"
+to = "https://fullstack-snei.onrender.com/api/:splat"
 
 [[redirects]]
 from = "/*"

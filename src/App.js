@@ -10,6 +10,7 @@ import Navbar from './Components/Navbar';
 import Signup from './pages/Signup';
 import Resource from './pages/Resource'
 import { UserContext } from './Context/UserContext';
+import Profile from './Components/Profile';
 
 function App() {
   const { resource } = React.useContext(UserContext);
@@ -25,6 +26,7 @@ function App() {
                         <Route path='/login' element={<Loginpage />} />
                         <Route path='/Signup' element={<Signup />} />
                         <Route path={`/frontend/${resource && resource.name}`} element={<Resource />} />
+                        <Route path='/profile' element={<Profile/>}></Route>
 
 
                     </Routes>

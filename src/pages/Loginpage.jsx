@@ -2,23 +2,12 @@ import React from 'react';
 import { Box, Button, Input, Center, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
-import { UserContext } from '../Context/UserContext';
+import { useLogin } from '../hooks/useLogin';
 
 export default function Loginpage() {
-    const { setUserData } = React.useContext(UserContext);
 
-    const handleLogin = (values, actions) => { 
-        axios.post('/api/user/login', values)
-            .then((response) => {
-                console.log(response.data);
-                setUserData(response.data);
-            })
-            .finally(() => {
-                actions.setSubmitting(false);
-            });
-    };
- 
+    const { login } = useLogin();
+
     return (
         <Center h="100vh">
             <Box p={10} w="450px" h="300px" shadow="md" borderWidth="1px" borderRadius="md" bg="#1A192F" border="none" color="white">
@@ -32,7 +21,7 @@ export default function Loginpage() {
                         password: Yup.string().required('Required')
                     })}
                     onSubmit={(values, actions) => {
-                        handleLogin(values, actions);
+                        login(values.email, values.password, actions);
                     }}
                 >
                     <Form style={{ textAlign: 'center' }}>

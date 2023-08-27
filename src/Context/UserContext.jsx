@@ -1,20 +1,14 @@
-// UserContext.js
+import React, { createContext, useState } from 'react';
 
-import React, { createContext,  useState } from 'react';
+export const UserContext = createContext();
 
-export const UserContext = createContext(); 
+export const UserProvider = ({ children }) => {
+  const [resource, setResource] = useState(null); 
+  const [route, setRoute] = useState('/'); 
 
-export const   UserProvider =({ children })=> {
-    const [userData, setUserData] = useState(null);
-    const [resource, setResource] = useState(null);
-
-
-
-    return (
-        <UserContext.Provider value={{ userData, setUserData,resource,setResource }}>
-            {children}
-        </UserContext.Provider>
-    );
-}
-
-
+  return (
+    <UserContext.Provider value={{ resource, setResource, route, setRoute }}>
+      {children}
+    </UserContext.Provider>
+  );
+};

@@ -12,11 +12,13 @@ import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 import { Spinner } from '@chakra-ui/react';
 import { Link,useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
 
-export default function FrontendRoadmap() {
-  const { userData, setUserData, setResource } = useContext(UserContext);
 
-  const [selectedCourse, setSelectedCourse] = useState([]);
+export default function FrontendRoadmap() { 
+  const { setResource,setRoute} = useContext(UserContext);
+  const{ userData,setUserData} = useContext(AuthContext)   
+  const [selectedCourse, setSelectedCourse] = useState([]); 
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate()
 
@@ -24,13 +26,13 @@ export default function FrontendRoadmap() {
     async function fetchData() {
       try {
         const timestamp = Date.now();
-        const res = await axios.get(`/api/detailedFrontend?timestamp=${timestamp}`);
+        const res = await axios.get(`/api/detailedFrontend?timestamp:${timestamp}`)
         setSelectedCourse(res.data); // Update selectedCourse with fetched data
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
-    }
+    } 
 
     fetchData();
   }, []);
@@ -74,6 +76,12 @@ export default function FrontendRoadmap() {
     console.log(course)
     setResource(course);
   };
+
+  const handleNavigate=()=>{
+    navigate('/login')
+    setRoute('/frontend')
+    
+  }
 
   const progressValue = ((userData?.Data?.completedLanguages.length) / 25) * 100 || 0;
 
@@ -123,7 +131,13 @@ export default function FrontendRoadmap() {
                           colorScheme="purple"
                           size="lg"
                           isChecked={isCourseCompleted(course.name)}
-                          onChange={userData ? () => handleCheckboxChange(course):()=>navigate('/login')}
+                          onChange={() => {
+                            if (userData) {
+                              handleCheckboxChange(course);
+                            } else {
+                              handleNavigate();
+                            }
+                          }}
                           
                         />
                        <Link to={`/frontend/${course.name}`} >

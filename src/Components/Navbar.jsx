@@ -1,8 +1,25 @@
 import React from 'react';
 import { Flex, Text,HStack, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
+import { useLogout } from '../hooks/useLogout';
+
 
 export default function Navbar() {
+  const { userData } = React.useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const { logout } = useLogout()
+  const handleLogout =() =>
+  {
+    logout()
+  }
+  const handleProfile=()=>{
+    navigate('/profile')
+  }
     return (
         <Flex bgColor="#1A192F" color="white" height="65px" width="100%" position="fixed" alignItems="center" justify="space-between" zIndex={999}>
             <HStack  px={10}>
@@ -24,12 +41,29 @@ export default function Navbar() {
                     </Link>
                 </HStack>
              <HStack px={10} gap="2rem">
-             <Link to="/login">
+                {userData?(
+                    <>
+                   <Button colorScheme="gray" size="sm" borderRadius="20px" onClick={handleLogout}> <Text>Logout</Text></Button>
+                  <Link to="/profile">
+                  <Button colorScheme="gray" 
+                   size="sm"
+                    borderRadius="20px" 
+                    onClick={handleProfile}>
+                         <Text>Profile</Text></Button>
+                  </Link>
+                   </>
+                ):
+                (
+                    <>   
+                    <Link to="/login">  
                     <Text>Login</Text>
                 </Link>
                 <Link to="/Signup">
                    <Button colorScheme="gray" size="sm" borderRadius="20px"> <Text>Signin</Text></Button>
                 </Link>
+                </>
+                )
+                }
              </HStack>
         </Flex>
     );
