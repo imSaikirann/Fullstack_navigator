@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Button, Center } from '@chakra-ui/react';
+import {  Button, Center } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import TypeWriter from '../Components/TypeWriter';
-import { Card, CardHeader, CardBody, CardFooter, Stack, Heading, Text ,VStack} from '@chakra-ui/react'
+import { Card,  CardBody, CardFooter, Stack, Heading, Text ,VStack} from '@chakra-ui/react'
 
 export default function Home() {
     return (

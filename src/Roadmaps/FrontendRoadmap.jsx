@@ -27,7 +27,7 @@ export default function FrontendRoadmap() {
     async function fetchData() {
       try {
         const timestamp = Date.now();
-        const res = await axios.get(`/api/detailedFrontend?timestamp:{timestamp}`)
+        const res = await axios.get(`/api/detailedFrontend?timestamp:${timestamp}`) 
         setSelectedCourse(res.data); // Update selectedCourse with fetched data
         setLoading(false);
       } catch (error) {
