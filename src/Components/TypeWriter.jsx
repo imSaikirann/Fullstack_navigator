@@ -9,12 +9,12 @@ export default function TypeWriter() {
   });
 
   return (
-    <Box width="80%"  textAlign="left" padding="2rem 1rem" >
-      <Heading as="h2" size="lg" >
+    <Box width="80%"  textAlign="left" padding="4rem 2rem"   fontFamily="Raleway" >
+      <Heading as="h3" size="xl" color="#333333"   fontFamily="fira sans" >
         Discover everything you need for your journey
         <br />
         at Full Stack Navigator With{' '}
-        <Box as="span" color="purple">
+        <Box as="span" color="#000000">
           {text}
         </Box>
         <Cursor cursorStyle="|" />

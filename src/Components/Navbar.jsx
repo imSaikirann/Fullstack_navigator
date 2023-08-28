@@ -19,13 +19,16 @@ export default function Navbar() {
   }
   const handleProfile=()=>{
     navigate('/profile')
-  }
+  } 
     return (
-        <Flex bgColor="#1A192F" color="white" height="65px" width="100%" position="fixed" alignItems="center" justify="space-between" zIndex={999}>
+        <Flex bgColor="#EBECF1" color="#222831"
+        fontFamily="Raleway"
+        boxShadow=" rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;" 
+        height="65px" width="100%" position="fixed" alignItems="center" justify="space-between" zIndex={999}>
             <HStack  px={10}>
                 <Link to="/">
-                    <Text fontSize="xl" fontWeight="bold">
-                        FNS
+                    <Text fontSize="1.8rem" t fontWeight="bold">
+                        FSN
                     </Text>
                 </Link>
                 </HStack>
@@ -59,7 +62,7 @@ export default function Navbar() {
                     <Text>Login</Text>
                 </Link>
                 <Link to="/Signup">
-                   <Button colorScheme="gray" size="sm" borderRadius="20px"> <Text>Signin</Text></Button>
+                   <Button colorScheme="gray" size="sm" borderRadius="0px"> <Text color="blackAlpha.900">Signup</Text></Button>
                 </Link>
                 </>
                 )

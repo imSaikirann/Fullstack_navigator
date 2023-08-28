@@ -28,7 +28,7 @@ header .con{
   padding-Top: 64px;
 }
 .home{
-  background-color:#CED4DA;
+  background-color:#F1F6F9;
   font-family: Raleway;
 }
 
@@ -44,7 +44,7 @@ header .con{
 }
 
 .App-link {
-  color: #61dafb;
+  color: whitesmoke;
 }
 
 @keyframes App-logo-spin {

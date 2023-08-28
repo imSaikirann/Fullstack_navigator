@@ -13,6 +13,7 @@ import { UserContext } from '../Context/UserContext';
 import { Spinner } from '@chakra-ui/react';
 import { Link,useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
+import {DownIcon} from './svgs/Svg.jsx'
 
 
 export default function FrontendRoadmap() { 
@@ -26,7 +27,7 @@ export default function FrontendRoadmap() {
     async function fetchData() {
       try {
         const timestamp = Date.now();
-        const res = await axios.get(`/api/detailedFrontend?timestamp:${timestamp}`)
+        const res = await axios.get(`/api/detailedFrontend?timestamp:{timestamp}`)
         setSelectedCourse(res.data); // Update selectedCourse with fetched data
         setLoading(false);
       } catch (error) {
@@ -110,16 +111,16 @@ export default function FrontendRoadmap() {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          height="90rem"
+          height="100vh"
           padding="2rem"
           width="90%"
           borderRadius="10px"
           textAlign="center"
         >
           {isLoading ? (
-            <Box mt="4" display="flex" justifyContent="center" alignItems="center">
-              <Spinner size="md" />
-            </Box>
+           <Box mt="4" display="flex" justifyContent="center" alignItems="center" height="100%">
+           <Spinner size="md" colorScheme='blue'/>
+         </Box>
           ) : (
             <>
               <Flex direction="column" align="center">
@@ -129,6 +130,7 @@ export default function FrontendRoadmap() {
                       <Flex gap="2px">
                         <Checkbox
                           colorScheme="purple"
+
                           size="lg"
                           isChecked={isCourseCompleted(course.name)}
                           onChange={() => {
@@ -141,13 +143,15 @@ export default function FrontendRoadmap() {
                           
                         />
                        <Link to={`/frontend/${course.name}`} >
-                       <Button size="md" w="175px" onClick={() => handleResouce(course)}>
-                          <Text fontSize="small" color="#1A192F" fontFamily="sans-serif">
+                       <Button size="md" bgColor='rgb(51, 60, 74)' w="175px" onClick={() => handleResouce(course)}>
+                          <Text fontSize="small" color="white" fontFamily="sans-serif">
                             {course.name}
                           </Text>
                         </Button>
                        </Link>
                       </Flex>
+                      <DownIcon/>
+
                     </Flex>
                   </Box>
                 ))}
