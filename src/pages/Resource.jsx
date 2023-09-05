@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import {
   Button,
   Box,
-  Heading,
   Flex,
   Text,
   SimpleGrid,
@@ -11,15 +10,13 @@ import {
   DrawerBody,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
 } from '@chakra-ui/react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+import {  useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import axios from 'axios';
-import { UserContext } from '../Context/UserContext';
+import { UserContext } from '../Context/UserContext'; 
 
 export default function Resource() {
   const { resource } = useContext(UserContext);

@@ -5,7 +5,6 @@ import { UserContext } from "../Context/UserContext";
 
 export const useSignup = () => {
     const { setUserData } = useContext(AuthContext);
-    const {progress} = useContext(UserContext)
     const navigate = useNavigate();
 
     const signup = async (email, password) => {

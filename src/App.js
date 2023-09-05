@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import './App.css';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'; // Import extendTheme
+import { ChakraProvider} from '@chakra-ui/react'; // Import extendTheme
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import { Box } from '@chakra-ui/react';
@@ -17,7 +17,6 @@ import Bresource from './pages/Bresouce'
 
 
 function App() {
-const {userData} = useContext(AuthContext)
 
   const { resource } = React.useContext(UserContext); 
 

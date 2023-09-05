@@ -17,16 +17,13 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { UserContext } from '../Context/UserContext';
 
 export default function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { userData } = useContext(AuthContext);
-  const { progress } = useContext(UserContext);
 
-  const navigate = useNavigate();
 
   const { logout } = useLogout();
 

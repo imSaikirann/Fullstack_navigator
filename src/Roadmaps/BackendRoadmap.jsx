@@ -12,10 +12,8 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
 } from '@chakra-ui/react';
 import { ArrowDownIcon } from '@chakra-ui/icons'
 import axios from 'axios';
