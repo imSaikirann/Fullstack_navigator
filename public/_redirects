@@ -1,5 +1,5 @@
-/api/* https://fullstack-snei.onrender.com/api/:splat 200!
+/api/* https://fullstack-snei.onrender.com/api:splat 200!
 /api/user/login https://fullstack-snei.onrender.com/api/user/login 200!
-/api/user/login https://fullstack-snei.onrender.com/api/user/signin 200!
+/api/user/signup https://fullstack-snei.onrender.com/api/user/signup 200!
 
 /* /index.html 200

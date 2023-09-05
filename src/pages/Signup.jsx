@@ -1,15 +1,33 @@
 import React from 'react';
-import { Box, Button, Input, Center, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Input,
+  Center,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Text,
+} from '@chakra-ui/react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useSignup } from '../hooks/useSignup';
 
 export default function Signup() {
-  const { signup } = useSignup();
+  const { signup, error } = useSignup(); // Include 'error' from your useSignup hook
 
   return (
     <Center h="100vh">
-      <Box p={10} w="450px" padding="2rem" boxShadow="rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;" borderRadius="md" bg="#FFFFFF" border="none" color="#00000">
+      <Box
+        p={10}
+        w="450px"
+        padding="2rem"
+        boxShadow="rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;"
+        borderRadius="md"
+        bg="#FFFFFF"
+        border="none"
+        color="#00000"
+      >
         <Formik
           initialValues={{
             email: '',
@@ -42,6 +60,11 @@ export default function Signup() {
                 </FormControl>
               )}
             </Field>
+            {error && (
+              <Text color="red.500" mt={2}>
+                {error.message}
+              </Text>
+            )}
             <Button mt={4} w="100%" colorScheme="gray" type="submit">
               Signup
             </Button>

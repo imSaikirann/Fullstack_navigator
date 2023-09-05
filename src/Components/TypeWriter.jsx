@@ -4,7 +4,7 @@ import { Box, Heading } from '@chakra-ui/react';
 
 export default function TypeWriter() {
   const [text ] = useTypewriter({
-    words: ['Roadmaps', 'Github Projects'],
+    words: ['Roadmaps', 'Github Projects','Developer Tools'],
     loop: {},
   });
 

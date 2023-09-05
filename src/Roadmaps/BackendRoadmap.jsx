@@ -26,7 +26,7 @@ import { AuthContext } from '../Context/AuthContext';
 import { PlainIcon } from './svgs/Svg.jsx'
 
 
-export default function FrontendRoadmap() {
+export default function BackendRoadmap() {
   const { setResource, setRoute } = useContext(UserContext);
   const { setProgress } = useContext(UserContext);
 
@@ -36,11 +36,10 @@ export default function FrontendRoadmap() {
   const navigate = useNavigate()
 
   //fetching roamdmap
-  // Define fetchData function to fetch roadmap
   const fetchData = async () => {
     try {
       const timestamp = Date.now();
-      const res = await axios.get(`/api/detailedFrontend?timestamp:${timestamp}`);
+      const res = await axios.get(`/api/backendRoadmap?timestamp=${timestamp}`);
       setSelectedCourse(res.data);
       setLoading(false);
     } catch (error) {
@@ -54,13 +53,13 @@ export default function FrontendRoadmap() {
   });
 
   // Update progress bar value
-  const progressValue = ((userData?.Data?.completedLanguages.length) / 40) * 100 || 0;
+  const progressValue = ((userData?.Data?.bcompletedLanguages.length) / 40) * 100 || 0;
   setProgress(progressValue); // Update the context value
 
   const isCourseCompleted = (courseName) => {
     // Check if userData exists and has a user property
     if (userData && userData.user && userData.user._id) {
-      return userData.Data?.completedLanguages?.includes(courseName) || false;
+      return userData.Data?.bcompletedLanguages?.includes(courseName) || false;
     }
     // Return false if userData or user._id is not defined
     return false;
@@ -69,7 +68,7 @@ export default function FrontendRoadmap() {
 
   const handleCheckboxChange = async (course) => {
     try {
-      const updatedCompletedLanguages = [...userData.Data.completedLanguages];
+      const updatedCompletedLanguages = [...userData.Data.bcompletedLanguages];
 
       if (isCourseCompleted(course.name)) {
         const index = updatedCompletedLanguages.indexOf(course.name);
@@ -84,13 +83,13 @@ export default function FrontendRoadmap() {
         ...userData,
         Data: {
           ...userData.Data,
-          completedLanguages: updatedCompletedLanguages,
+          bcompletedLanguages: updatedCompletedLanguages,
         },
       };
       setUserData(updatedUserData);
 
       await axios.patch(`/api/updateCheckbox/${userData.user._id}`, {
-        completedLanguages: updatedCompletedLanguages,
+        bcompletedLanguages: updatedCompletedLanguages,
       });
     } catch (error) {
       console.log(error);
@@ -101,7 +100,7 @@ export default function FrontendRoadmap() {
   const handleResouce = (course) => {
     console.log(course)
     setResource(course);
-    localStorage.setItem('resource', JSON.stringify(course))
+    localStorage.setItem('resource', JSON.stringify(course)) 
   };
 
   //Navigating
@@ -115,13 +114,14 @@ export default function FrontendRoadmap() {
       <Flex>
         <Box width="50%" padding="1rem 3.9rem">
           <Text fontSize="2rem" fontWeight="bold">
-            Frontend Roadmap
+            Backend Roadmap
           </Text>
         </Box>
         <Box width="50%" padding="1rem 1rem">
           <Progress
             borderRadius="10px"
             bgColor="#EDFDF5"
+
             transition="width 0.3 ease-in-out"
             h="20px"
             value={progressValue}
@@ -136,7 +136,7 @@ export default function FrontendRoadmap() {
           flexDirection="column"
           alignItems="center"
           height="1000px"
-          padding="2rem"
+          padding="2rem" 
           width="90%"
           borderRadius="10px"
           textAlign="center"
@@ -147,62 +147,31 @@ export default function FrontendRoadmap() {
             </Box>
           ) : (
             <>
-              <Flex direction="column" align="center">
-                {/*internet,html and css*/}
-                {selectedCourse.slice(0, 3).map((course, index) => (
-                  <Box key={index}>
-                    <Flex direction="column" align="center">
-                      <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center" >
-                        <Checkbox
-                          
-                          borderColor="#555555"
-                          size="lg"
-                          isChecked={isCourseCompleted(course.name)}
-                          onChange={() => {
-                            if (userData) {
-                              handleCheckboxChange(course);
-                            } else {
-                              handleNavigate();
-                            }
-                          }}
-                        />
-                        <Link to={`/frontend/${course.name}`} >
-                          <Button size="md" bgColor='rgb(51, 60, 74)' w="125px" onClick={() => handleResouce(course)}>
-                            <Text fontSize="small" color="white" fontFamily="sans-serif">
-                              {course.name}
-                            </Text>
-                          </Button>
-                        </Link>
-                      </Box>
-                      <Box marginLeft="12px">
-                        <ArrowDownIcon w="30px" h="40px" fontWeight="lighter" />
-                      </Box>
-                    </Flex>
-                  </Box>
-                ))}
+              <Flex direction="column" align="center">                          
 
                 {/*js*/}
                 <Popover placement='right-end' offset={[20,45]} >
                   <PopoverTrigger>
                     <Box>
-                      <Box gap="2px" w="100px" alignItems="center" >
-                        <Button size="md" bgColor='rgb(51, 60, 74)' w="125px" marginLeft="0.2rem" >
+                      <Box gap="2px" w="125px" alignItems="center" >
+                        <Button size="md" bgColor='rgb(51, 60, 74)' w="150" marginLeft="0.2rem" >
                           <Text fontSize="small" color="white" fontFamily="sans-serif">
-                            Javascript
+                            Learn a Language
                           </Text>
                         </Button>
                       </Box>
-                      <Box marginLeft="40px">
-                        <PlainIcon w="30px" h="40px" fontWeight="lighter" />
-                      </Box>
+                      <Box marginLeft="12px">
+        <ArrowDownIcon w="30px" h="40px" fontWeight="lighter" />
+      </Box>
                     </Box>
                   </PopoverTrigger>
                   <PopoverContent maxW = '290px' >
                     <PopoverArrow />
                     <PopoverCloseButton />
-                    <PopoverHeader>Javascript</PopoverHeader>
+                            Learn any one Language
+                    <PopoverHeader></PopoverHeader>
                     <PopoverBody >
-                      {selectedCourse.slice(3, 5).map((course, index) => (
+                      {selectedCourse.slice(0, 4).map((course, index) => (
                         <Box key={index} >
                           <Flex direction="column" align="center" >
                             <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center" >
@@ -218,7 +187,7 @@ export default function FrontendRoadmap() {
                                   }
                                 }}
                               />
-                              <Link to={`/frontend/${course.name}`} >
+                              <Link to={`/backend/${course.name}`} >
                                 <Button
                                   size="md"
                                   bg='rgb(51, 60, 74)'
@@ -254,12 +223,12 @@ export default function FrontendRoadmap() {
                       </Box>
                     </Box>
                   </PopoverTrigger>
-                  <PopoverContent>
+                  <PopoverContent> 
                     <PopoverArrow />
                     <PopoverCloseButton />
-                    <PopoverHeader>Code tracking,remote repositiories</PopoverHeader>
+                    <PopoverHeader>Version Control System</PopoverHeader>
                     <PopoverBody>
-                      {selectedCourse.slice(5, 7).map((course, index) => (
+                      {selectedCourse.slice(4, 6).map((course, index) => (
                         <Box key={index}>
                           <Flex direction="column" align="center">
                             <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center" >
@@ -295,38 +264,6 @@ export default function FrontendRoadmap() {
                   </PopoverContent>
                 </Popover>
 
-                {/*npm*/}
-                {selectedCourse.slice(7, 8).map((course, index) => (
-                  <Box key={index}>
-                    <Flex direction="column" align="center">
-                      <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center" >
-                        <Checkbox
-                          borderColor="#555555"
-                          size="lg"
-                          isChecked={isCourseCompleted(course.name)}
-                          onChange={() => {
-                            if (userData) {
-                              handleCheckboxChange(course);
-                            } else {
-                              handleNavigate();
-                            }
-                          }}
-                        />
-                        <Link to={`/frontend/${course.name}`} >
-                          <Button size="md" bgColor='rgb(51, 60, 74)' w="125px" onClick={() => handleResouce(course)}>
-                            <Text fontSize="small" color="white" fontFamily="sans-serif">
-                              {course.name}
-                            </Text>
-                          </Button>
-                        </Link>
-                      </Box>
-                      <Box marginLeft="12px">
-                        <ArrowDownIcon w="30px" h="40px" fontWeight="lighter" />
-                      </Box>
-                    </Flex>
-                  </Box>
-                ))}
-
 
                 {/* js frameworks*/}
                 <Popover placement='left-start' >
@@ -335,7 +272,7 @@ export default function FrontendRoadmap() {
                       <Box gap="2px" w="130px" alignItems="center">
                         <Button size="md" bgColor='rgb(51, 60, 74)' w="160px" >
                           <Text fontSize="small" color="white" fontFamily="sans-serif" w="150px" >
-                            JS Frameworks
+                            Relational Database
                           </Text>
                         </Button>
                       </Box>
@@ -347,9 +284,9 @@ export default function FrontendRoadmap() {
                   <PopoverContent>
                     <PopoverArrow />
                     <PopoverCloseButton />
-                    <PopoverHeader>Learn any one Framework</PopoverHeader>
+                    <PopoverHeader>Database management Systems</PopoverHeader>
                     <PopoverBody>
-                      {selectedCourse.slice(8, 11).map((course, index) => (
+                      {selectedCourse.slice(6, 8).map((course, index) => (
                         <Box key={index}>
                           <Flex direction="column" align="center">
                             <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center" >
@@ -391,7 +328,7 @@ export default function FrontendRoadmap() {
                       <Box gap="2px" w="130px" alignItems="center">
                         <Button size="md" bgColor='rgb(51, 60, 74)' w="160px" >
                           <Text fontSize="small" color="white" fontFamily="sans-serif" w="150px" >
-                            CSS Frameworks
+                            NoSQL Database
                           </Text>
                         </Button>
                       </Box>
@@ -403,9 +340,9 @@ export default function FrontendRoadmap() {
                   <PopoverContent>
                     <PopoverArrow />
                     <PopoverCloseButton />
-                    <PopoverHeader>Learn any one Framework</PopoverHeader>
+                    <PopoverHeader>NoSQL , Realtime , Distributed</PopoverHeader>
                     <PopoverBody>
-                      {selectedCourse.slice(11, 14).map((course, index) => (
+                      {selectedCourse.slice(8, 11).map((course, index) => (
                         <Box key={index}>
                           <Flex direction="column" align="center">
                             <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center" >
@@ -441,7 +378,7 @@ export default function FrontendRoadmap() {
                   </PopoverContent>
                 </Popover>
 
-{selectedCourse.slice(14,15).map((course, index) => (
+{selectedCourse.slice(11,13).map((course, index) => (
   <Box key={index}>
     <Flex direction="column" align="center">
       <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center">
@@ -458,7 +395,7 @@ export default function FrontendRoadmap() {
           }}
         />
         <Link to={`/frontend/${course.name}`}>
-          <Button size="md" bgColor='rgb(51, 60, 74)' w="180px" onClick={() => handleResouce(course)}>
+          <Button size="md" bgColor='rgb(51, 60, 74)' w="190px" onClick={() => handleResouce(course)}>
             <Text fontSize="small" color="white" fontFamily="sans-serif">
               {course.name}
             </Text>
@@ -471,60 +408,38 @@ export default function FrontendRoadmap() {
     </Flex>
   </Box>
 ))}
-{/* version control-git & github */}
-<Popover placement='left-start'>
-  <PopoverTrigger>
-    <Box>
-      <Box gap="2px" w="130px" alignItems="center">
-        <Button size="md" bgColor='rgb(51, 60, 74)' w="160px" >
-          <Text fontSize="small" color="white" fontFamily="sans-serif" w="150px" >
-            Server Side Rendering
-          </Text>
-        </Button>
+{selectedCourse.slice(13, 14).map((course, index) => (
+  <Box key={index}>
+    <Flex direction="column" align="center">
+      <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center">
+        <Checkbox
+          borderColor="#555555"
+          size="lg"
+          isChecked={isCourseCompleted(course.name)}
+          onChange={() => {
+            if (userData) {
+              handleCheckboxChange(course);
+            } else {
+              handleNavigate();
+            }
+          }}
+        />
+        <Link to={`/frontend/${course.name}`}>
+          <Button size="md" bgColor='rgb(51, 60, 74)' w="125px" onClick={() => handleResouce(course)}>
+            <Text fontSize="small" color="white" fontFamily="sans-serif">
+              {course.name}
+            </Text>
+          </Button>
+        </Link>
       </Box>
-    
-    </Box>
-  </PopoverTrigger>
-  <PopoverContent>
-    <PopoverArrow />
-    <PopoverCloseButton />
-    <PopoverHeader>Server side rendering</PopoverHeader>
-    <PopoverBody>
-      {selectedCourse.slice(15,16).map((course, index) => (
-        <Box key={index}>
-          <Flex direction="column" align="center">
-            <Box gap="10px" w="300px" alignItems="center" display="flex" flexDirection="row" justifyContent="center" >
-              <Checkbox
-                borderColor="#555555"
-                size="lg" 
-                isChecked={isCourseCompleted(course.name)}
-                onChange={() => {
-                  if (userData) {
-                    handleCheckboxChange(course);
-                  } else {
-                    handleNavigate();
-                  }
-                }}
-              />
-              <Link to={`/frontend/${course.name}`}>
-                <Button
-                  size="sm"
-                  bg='rgb(51, 60, 74)'
-                  onClick={() => handleResouce(course)}
-                  marginTop="10px"
-                >
-                  <Text fontSize="small" color="white" fontFamily="sans-serif" w="100px">
-                    {course.name}
-                  </Text>
-                </Button>
-              </Link>
-            </Box>
-          </Flex>
-        </Box>
-      ))}
-    </PopoverBody>
-  </PopoverContent>
-</Popover>
+      <Box marginLeft="12px">
+        <ArrowDownIcon w="30px" h="40px" fontWeight="lighter" />
+      </Box>
+    </Flex>
+  </Box>
+))}
+
+                  
 
 
               </Flex>

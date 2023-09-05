@@ -9,7 +9,7 @@ export default function Loginpage() {
 
   return (
     <Center h="100vh">
-      <Box p={10} w="450px" padding="2rem 3rem" boxShadow="rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;" borderRadius="md" bg="#FFFFFF" border="none" color="#000000">
+      <Box  p={10} w="450px" padding="2rem 3rem" boxShadow="rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;" borderRadius="md" bg="#FFFFFF" border="none" color="#000000">
         <Formik
           initialValues={{
             email: '',

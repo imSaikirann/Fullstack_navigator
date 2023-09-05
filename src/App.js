@@ -10,42 +10,34 @@ import Navbar from './Components/Navbar';
 import Signup from './pages/Signup';
 import Resource from './pages/Resource'
 import { UserContext } from './Context/UserContext';
-import Profile from './Components/Profile';
 import { AuthContext } from './Context/AuthContext';
+import DeveloperTools from './pages/DeveloperTools';
+import BackendRoadmap from './Roadmaps/BackendRoadmap'; 
+import Bresource from './pages/Bresouce'
 
-// Define your custom theme using extendTheme
-const theme = extendTheme({
-  // Customize your theme properties here
-  // For example: 
-  colors: {
-    primary: '#FF5733',
-    secondary: '#4CAF50',
-    btn:"#434343"
-  },
-  fonts: {
-    body: 'Raleway, sans-serif',
-    heading: 'Raleway, sans-serif',
-    // Add more font styles if needed
-  },
-});
 
 function App() {
 const {userData} = useContext(AuthContext)
 
-  const { resource } = React.useContext(UserContext);
+  const { resource } = React.useContext(UserContext); 
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider >
       <BrowserRouter>
         <Navbar />
         <Box className='content'>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/frontend' element={<FrontendRoadmap />} />
+            <Route path='/backend' element={<BackendRoadmap />} />
+
+            <Route path={`/backend/${resource && resource.name}`} element={<Bresource/>} />
+
             <Route path='/login' element={<Loginpage />} />
             <Route path='/Signup' element={<Signup />} />
             <Route path={`/frontend/${resource && resource.name}`} element={<Resource />} />
-            <Route path='/profile' element={userData ? <Profile/> : <Loginpage/>}></Route>
+            <Route path='/developertools' element={<DeveloperTools />} />
+
           </Routes>
         </Box>
       </BrowserRouter>

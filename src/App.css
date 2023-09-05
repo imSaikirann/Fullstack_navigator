@@ -23,12 +23,17 @@ header .con{
   padding: 10px,20px;
   
 }
+/* In a separate CSS file or using Chakra UI's css prop */
+.custom-drawer {
+  width: 30%;
+}
+
 .content
 {
   padding-Top: 64px;
 }
 .home{
-  background-color:#F1F6F9;
+  background-color:#EDF0F5;
   font-family: Raleway;
 }
 
