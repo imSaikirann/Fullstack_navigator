@@ -18,7 +18,6 @@ import {
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { useLogout } from '../hooks/useLogout';
-import { UserContext } from '../Context/UserContext';
 
 export default function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

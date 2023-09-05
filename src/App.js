@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './App.css';
 import { ChakraProvider} from '@chakra-ui/react'; // Import extendTheme
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -10,7 +10,6 @@ import Navbar from './Components/Navbar';
 import Signup from './pages/Signup';
 import Resource from './pages/Resource'
 import { UserContext } from './Context/UserContext';
-import { AuthContext } from './Context/AuthContext';
 import DeveloperTools from './pages/DeveloperTools';
 import BackendRoadmap from './Roadmaps/BackendRoadmap'; 
 import Bresource from './pages/Bresouce'

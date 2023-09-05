@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from "../Context/UserContext";
 
 export const useSignup = () => {
     const { setUserData } = useContext(AuthContext);
