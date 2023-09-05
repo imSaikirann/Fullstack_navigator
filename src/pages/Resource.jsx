@@ -9,9 +9,9 @@ import {
   Drawer,
   DrawerBody,
   DrawerFooter,
-  DrawerHeader,
   DrawerContent,
   DrawerCloseButton,
+  DrawerOverlay
 } from '@chakra-ui/react';
 import {  useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
