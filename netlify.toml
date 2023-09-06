@@ -4,7 +4,7 @@ to = "https://fullstack-snei.onrender.com/api/user/login"
 
 [[redirects]]
 from = "/api/user/signin"
-to = "https://fullstack-snei.onrender.comapi/user/signin"
+to = "https://fullstack-snei.onrender.com/api/user/signin"
 
 [[redirects]]
 from = "/api/*"
