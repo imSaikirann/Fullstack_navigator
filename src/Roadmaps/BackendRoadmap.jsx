@@ -37,7 +37,7 @@ export default function BackendRoadmap() {
   const fetchData = async () => {
     try {
       const timestamp = Date.now();
-      const res = await axios.get(`/api/backendRoadmap?timestamp=$timestamp}`);
+      const res = await axios.get(`/api/backendRoadmap?timestamp=${timestamp}`);  
       setSelectedCourse(res.data);
       setLoading(false);
     } catch (error) {

@@ -13,7 +13,7 @@ import {
   DrawerCloseButton,
   DrawerOverlay
 } from '@chakra-ui/react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
