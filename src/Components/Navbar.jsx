@@ -14,6 +14,10 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
@@ -22,7 +26,6 @@ import { useLogout } from '../hooks/useLogout';
 export default function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { userData } = useContext(AuthContext);
-
 
   const { logout } = useLogout();
 
@@ -41,14 +44,11 @@ export default function Navbar() {
   const progressValue = ((userData?.Data?.completedLanguages.length) / 40) * 100 || 0;
   const bprogressValue = ((userData?.Data?.bcompletedLanguages.length) / 40) * 100 || 0;
 
-  
-
   return (
     <Flex
-      bgColor="#F4F6F6"
+      bgColor="#FFFFFF"
       color="#222831"
       fontFamily="Raleway"
-      boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;"
       height="65px"
       width="100%"
       position="fixed"
@@ -62,11 +62,25 @@ export default function Navbar() {
         </Link>
       </HStack>
       <HStack align="center" gap="1.6rem">
-        <Link to="/about">
-          <Text fontSize="sm">About</Text>
-        </Link>
+      <Box>
+        <Menu>
+          <MenuButton variant="outline" size="sm" marginRight="1rem">
+            Roadmaps
+          </MenuButton>
+          <MenuList>
+            <Link to="/frontend">
+            <MenuItem>Frontend</MenuItem>
+            </Link>
+            <Link to="/backend">
+            <MenuItem>Backend</MenuItem>
+            </Link>
+
+          
+          </MenuList>
+        </Menu>
+      </Box>
         <Link to="/developertools">
-          <Text fontSize="sm">Developer Tools</Text>
+          <Text fontSize="1rem" fontFamily="Raleway">Developer Tools</Text>
         </Link>
         {userData ? (
           <>
@@ -77,7 +91,9 @@ export default function Navbar() {
               <DrawerOverlay />
               <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader>Hello {userData.user.email}</DrawerHeader>
+                <DrawerHeader fontStyle="Raleway">Hello {userData.user.email.split('@')[0]} &#x1F680; </DrawerHeader>
+
+
                 <DrawerBody>
                   <Box
                     bgColor="gray.200"
@@ -89,14 +105,36 @@ export default function Navbar() {
                     w="270px"
                     h="300px"
                   >
-                    <Box>
-                      <Text fontSize="1.3rem">Frontend Progress</Text>
-                      <Progress h="15px" borderRadius="8px" value={progressValue} colorScheme="blue" />
-                    </Box>
-                    <Box>
-                      <Text fontSize="1.3rem">Backend Progress</Text>
-                      <Progress h="15px" borderRadius="8px" value={bprogressValue} colorScheme="blue" />
-                    </Box>
+                  <Flex alignItems="center" mb="1rem">
+  <Box flex="1">
+    <Text fontSize="1.2rem" fontFamily="Raleway">
+      Frontend Progress
+    </Text>
+    <Progress
+      h="15px"
+      borderRadius="8px"
+      value={progressValue}
+      colorScheme="blue"
+    />
+  </Box>
+  <Text ml="1rem" fontWeight="bold">{progressValue}%</Text>
+</Flex>
+
+<Flex alignItems="center">
+  <Box flex="1">
+    <Text fontSize="1.2rem" fontFamily="Raleway">
+      Backend Progress
+    </Text>
+    <Progress
+      h="15px"
+      borderRadius="8px"
+      value={bprogressValue}
+      colorScheme="blue"
+    />
+  </Box>
+  <Text ml="1rem" fontWeight="bold">{bprogressValue}%</Text>
+</Flex>
+
                   </Box>
                 </DrawerBody>
                 <DrawerFooter>
@@ -105,18 +143,20 @@ export default function Navbar() {
                   </Button>
                 </DrawerFooter>
               </DrawerContent>
-            </Drawer> 
+            </Drawer>
           </>
         ) : (
           <>
             <Link to={userData ? '/' : '/login'}>
-              <Text>Login</Text>
+              <Text fontSize="1rem" fontWeight="bold">Login</Text>
             </Link>
-            <Link to="/Signup">
-              <Button colorScheme="blue" size="sm" borderRadius="9px" marignRight="1.5rem">
-                <Text >Signup</Text>
-              </Button>
-            </Link>
+            <HStack marginRight="1rem">
+              <Link to="/signup">
+                <Button bg="#1A191E" size="sm" borderRadius="14px">
+                  <Text fontSize="15px" color="#FFFFFF" borderRadius="10px">Signup</Text>
+                </Button>
+              </Link>
+            </HStack>
           </>
         )}
       </HStack>

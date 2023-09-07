@@ -58,7 +58,7 @@ export default function DeveloperTools() {
           w='500px'
           h='45px'
           focusBorderColor='transparent'
-          bgColor='#C5CCD3'
+          bgColor='#F0F2F3'
           placeholder='Search Tools..'
           value={inputTool}
           onChange={(e) => handleChange(e.target.value)}
@@ -70,7 +70,9 @@ export default function DeveloperTools() {
         ) : (
           <SimpleGrid columns={4} spacing={4} px='1rem'>
             {filteredTools.map((tool, index) => (
-              <Card key={index} maxW='sm' padding='1rem'>
+                    <Card key={index} maxW='sm' padding='1rem' 
+                    
+                    >
                 <CardBody>
                   <Flex justify='center'>
                     <Image
@@ -86,7 +88,7 @@ export default function DeveloperTools() {
                   spacing='3'
                    h='160px'
                     overflow='hidden'>
-                    <Heading size='md'>{tool.toolname}</Heading>
+                    <Heading size='md' color="#1A191E">{tool.toolname}</Heading>
                     <Text 
                     fontSize="14px"
                     textOverflow='ellipsis'>{tool.information}</Text>
@@ -95,7 +97,9 @@ export default function DeveloperTools() {
                 <Divider />
                 <CardFooter>
                   <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='blue'>
+                    <Button variant='solid' 
+                    bgColor="#1A191E" _hover={{style:"#1A191E"} } color="whiteAlpha.900"
+                    >
                       <a href={tool.link}>Download</a>
                     </Button>
                   </ButtonGroup>

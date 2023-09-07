@@ -33,8 +33,12 @@ header .con{
   padding-Top: 64px;
 }
 .home{
-  background-color:#EDF0F5;
+  background-color:#FFFFFF;
   font-family: Raleway;
+}
+.mainhome{
+  font-family: Raleway;
+
 }
 
 .App-header {

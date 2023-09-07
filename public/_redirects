@@ -1,5 +1,5 @@
-/api/* https://finalone-hi7z.onrender.com/api/:splat 200!
-/api/user/login https://finalone-hi7z.onrender.com/api/user/login 200!
-/api/user/signup https://finalone-hi7z.onrender.com/api/user/signup 200!
+/api/* https://finalbackk.onrender.com/api/:splat 200!
+/api/user/login https://finalbackk.onrender.com/api/user/login 200!
+/api/user/signup https://finalbackk.onrender.com/api/user/signup 200!
 
 /* /index.html 200

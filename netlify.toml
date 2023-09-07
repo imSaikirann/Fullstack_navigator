@@ -1,19 +1,19 @@
 [[redirects]]
 from = "/api/*"
-to = "https://finalone-hi7z.onrender.com/api/:splat"
+to = "https://finalbackk.onrender.com/api/:splat"
 status = 200
 
 [[redirects]]
 from = "/api/user/login"
-to = "https://finalone-hi7z.onrender.com/api/user/login"
+to = "https://finalbackk.onrender.com/api/user/login"
 status = 200
 
 [[redirects]]
 from = "/api/user/signup"
-to = "https://finalone-hi7z.onrender.com/api/user/signup"
+to = "https://finalbackk.onrender.com/api/user/signup"
 status = 200
 
 [[redirects]]
 from = "/*"
-to = "https://finalone-hi7z.onrender.com/index.html"
+to = "https://finalbackk.onrender.com/index.html"
 status = 200

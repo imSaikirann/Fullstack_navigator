@@ -6,33 +6,31 @@ import {
   Text,
   SimpleGrid,
   Checkbox,
+  Divider,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
 } from '@chakra-ui/react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 
-export default function Resource() {
+export default function Bresouce() {
   const { resource } = useContext(UserContext);
   const { userData, setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState(null);
 
-  // Function to open the drawer and set the selected topic data
   const onOpenDrawer = (topic) => {
     setIsDrawerOpen(true);
     setSelectedTopic(topic);
-    console.log(selectedTopic)
+    console.log(selectedTopic);
   };
 
-  // Function to close the drawer
   const onCloseDrawer = () => setIsDrawerOpen(false);
 
   const isCourseCompleted = (topicName) => {
@@ -44,7 +42,7 @@ export default function Resource() {
 
   const handleCheckboxChange = async (topicName) => {
     try {
-      const updatedCompletedLanguages = [...userData.Data.completedLanguages];
+      const updatedCompletedLanguages = [...userData.Data.bcompletedLanguages];
 
       if (isCourseCompleted(topicName)) {
         const index = updatedCompletedLanguages.indexOf(topicName);
@@ -59,13 +57,13 @@ export default function Resource() {
         ...userData,
         Data: {
           ...userData.Data,
-          completedLanguages: updatedCompletedLanguages,
+          bcompletedLanguages: updatedCompletedLanguages,
         },
       };
       setUserData(updatedUserData);
 
       await axios.patch(`/api/updateCheckbox/${userData.user._id}`, {
-        completedLanguages: updatedCompletedLanguages,
+        bcompletedLanguages: updatedCompletedLanguages,
       });
     } catch (error) {
       console.log(error);
@@ -82,17 +80,23 @@ export default function Resource() {
         <Text fontSize="2rem" fontWeight="700" py={5}>
           {resource.name.charAt(0).toUpperCase() + resource.name.slice(1)}
         </Text>
-        <Text fontSize="1.1rem" fontWeight="500">{resource.information}</Text>
+        <Text fontSize="1.1rem" fontWeight="500" fontStyle="Raleway">
+          {resource.information}
+        </Text>
         <Flex gap="1rem" py="5">
-          <Button as='a' href={resource.youtubeLink}>
+          <Button as="a" href={resource.youtubeLink}>
             Watch on Youtube
           </Button>
-          <Button as='a' href={resource.documentationLink}>
+          <Button as="a" href={resource.documentationLink}>
             Documentation
           </Button>
         </Flex>
+      </Box>
 
-        <Text fontSize="1.7rem" fontWeight="500">Topics</Text>
+      <Box padding="1rem">
+        <Text fontSize="1.7rem" fontWeight="500">
+          Topics
+        </Text>
         <SimpleGrid columns={4} spacing={5} py={5}>
           {resource &&
             resource.topics &&
@@ -124,47 +128,50 @@ export default function Resource() {
               </Box>
             ))}
         </SimpleGrid>
+      </Box>
 
+      <Box padding="1rem">
+        <Text fontSize="1.7rem" fontWeight="500" marginBottom="15px">
+          Github Projects
+        </Text>
 
-        <Box>
-          <Text fontSize="1.7rem" fontWeight="500">Github Projects</Text>
-
-          {resource && resource.githubProjects.map((projects, index) => (
+        {resource &&
+          resource.githubProjects.map((projects, index) => (
             projects.link && (
-              <Box >
+              <Box key={index}>
                 <Button marginTop="1rem" as="a" href={projects.link}>
                   <Text>{projects.text}</Text>
                 </Button>
               </Box>
             )
           ))}
-        </Box>
-
-        <Box marginTop="1.2rem" >
-          <Text fontSize="1.7rem" fontWeight="500">Website Links</Text>
-
-          {resource && resource.articles.map((article, index) => (
-            <Box key={index} >
-              <Text as="a" marginTop="1rem" href={article.link} textDecoration="underline">{article.text}</Text>
-            </Box>
-          ))}
-        </Box>
-
-        <Box marginTop="1.2rem"  bgColor="#C5CCD3" w="90%" borderRadius="10px" padding="1rem" >
-          <Text fontSize="1.7rem" fontWeight="500">Interview Questions</Text>
-          {resource && resource.questions.map((question, index) => (
-            <Box key={index}>
-              <Text fontSize="1.1rem">{question.text}</Text>
-            </Box>
-          ))}
-        </Box>
-
       </Box>
 
+      <Box marginTop="1.2rem">
+        <Text fontSize="1.7rem" fontWeight="500">
+          Website Links
+        </Text>
 
+        {resource && resource.articles.map((article, index) => (
+          <Box key={index}>
+            <Text as="a" marginTop="1rem" href={article.link} textDecoration="underline">
+              {article.text}
+            </Text>
+          </Box>
+        ))}
+      </Box>
 
-
-
+      <Box margin="1rem" bgColor="#C5CCD3" w="98%" borderRadius="10px" padding="1rem">
+        <Text fontSize="1.7rem" fontWeight="500" marginBottom="15px">
+          Interview Questions
+        </Text>
+        {resource && resource.questions.map((question, index) => (
+          <Box key={index}>
+            <Text fontSize="1.1rem">{question.text}</Text>
+            {index < resource.questions.length - 1 && <Divider borderColor="#00000" my="0.5rem" />}
+          </Box>
+        ))}
+      </Box>
 
       <Drawer size="md" isOpen={isDrawerOpen} placement='right' onClose={onCloseDrawer}>
         <DrawerOverlay />
@@ -190,12 +197,7 @@ export default function Resource() {
               </>
             )}
           </DrawerBody>
-          <DrawerFooter borderTopWidth='1px'>
-            <Button variant='outline' mr={3} onClick={onCloseDrawer}>
-              Close
-            </Button>
-            <Button colorScheme='blue'>Submit</Button>
-          </DrawerFooter>
+         
         </DrawerContent>
       </Drawer>
     </Box>

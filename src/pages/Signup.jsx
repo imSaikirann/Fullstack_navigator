@@ -43,14 +43,15 @@ const Signup = () => {
     >
       <VStack
         spacing={4}
-        bgColor="#EDF0F5"
+        boxShadow="rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;"
+
         padding="1.5rem"
         borderRadius="md"
         w="100%"
         maxW="400px"
         textAlign="center"
       >
-        <Text fontSize="xl" fontWeight="bold">
+        <Text fontSize="1.5rem" fontWeight="bold" fontStyle="Raleway">
           Signup
         </Text>
 
@@ -65,6 +66,7 @@ const Signup = () => {
               value={email}
               placeholder="Enter your email"
               bgColor="white"
+              fontStyle="Raleway"
             />
           </FormControl>
 
@@ -77,6 +79,7 @@ const Signup = () => {
                 value={password}
                 placeholder="Enter your password"
                 bgColor="white"
+                fontStyle="Raleway"
               />
               <InputRightElement>
                 <IconButton
@@ -84,17 +87,18 @@ const Signup = () => {
                   icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
                   onClick={togglePasswordVisibility}
                   variant="ghost"
+                  
                 />
               </InputRightElement>
             </InputGroup>
           </FormControl>
 
-          <Button colorScheme="teal" type="submit" width="100%" mt="2">
+          <Button  bgColor="#1A191E" _hover={{style:"#1A191E"} } color="whiteAlpha.900" type="submit" width="100%" mt="6">
             Signup
           </Button>
 
           {error && (
-          <Alert status="error">
+          <Alert status="error" mt="5">
             <AlertIcon />
             {error}
           </Alert>

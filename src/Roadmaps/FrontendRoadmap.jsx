@@ -33,12 +33,10 @@ export default function FrontendRoadmap() {
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate()
 
-  //fetching roamdmap
-  // Define fetchData function to fetch roadmap
   const fetchData = async () => {
     try {
       const timestamp = Date.now();
-      const res = await axios.get(`/api/detailedFrontend?timestamp=${timestamp}`);
+      const res = await axios.get(`/api/detailedFrontend?timestamp=${timestamp}`); 
       setSelectedCourse(res.data);
       setLoading(false);
     } catch (error) {
@@ -46,21 +44,18 @@ export default function FrontendRoadmap() {
     }
   };
 
-  // Check if the user is logged in and fetch data
   useEffect(() => {
     fetchData();
   });
 
   // Update progress bar value
-  const progressValue = ((userData?.Data?.completedLanguages.length) / 40) * 100 || 0;
-  setProgress(progressValue); // Update the context value
+  const progressValue = Math.round(((userData?.Data?.completedLanguages.length) / 59) * 100) || 0;
+  setProgress(progressValue); 
 
   const isCourseCompleted = (courseName) => {
-    // Check if userData exists and has a user property
     if (userData && userData.user && userData.user._id) {
       return userData.Data?.completedLanguages?.includes(courseName) || false;
     }
-    // Return false if userData or user._id is not defined
     return false;
   };
 
@@ -110,26 +105,34 @@ export default function FrontendRoadmap() {
   }
   return (
     <>
-      <Flex>
-        <Box width="50%" padding="1rem 3.9rem">
+      <Flex padding="1rem 2rem">
+        <Box width="50%" >
           <Text fontSize="2rem" fontWeight="bold">
             Frontend Roadmap
           </Text>
         </Box>
-        <Box width="50%" padding="1rem 1rem">
-          <Progress
-            borderRadius="10px"
-            bgColor="#EDFDF5"
-            transition="width 0.3 ease-in-out"
-            h="20px"
-            value={progressValue}
-          />
+        <Box width="50%" paddingTop="0.8rem" >
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <Box marginRight="10px">
+              <Text>{progressValue}%</Text>
+            </Box>
+            <Box flexGrow={1}>
+              <Progress
+                borderRadius="10px"
+                bgColor="#EDFDF5"
+                transition="width 0.3s ease-in-out"
+                h="20px"
+                value={progressValue}
+              />
+            </Box>
+          </Box>
+
         </Box>
       </Flex>
 
       <Center>
         <Box
-          className="home"
+          bgColor="#F0F2F3"
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -165,7 +168,7 @@ export default function FrontendRoadmap() {
                           }}
                         />
                         <Link to={`/frontend/${course.name}`} >
-                          <Button size="md" bgColor='rgb(51, 60, 74)' _hover={{color:"#000000"}} w="125px" onClick={() => handleResouce(course)}>
+                          <Button size="md" px={9} py="1" bgColor='rgb(51, 60, 74)' _hover={{color:"#000000"}} w="160px" onClick={() => handleResouce(course)}>
                             <Text fontSize="0.9rem" color="white" fontFamily="sans-serif">
                               {course.name}
                             </Text>
@@ -183,14 +186,14 @@ export default function FrontendRoadmap() {
                 <Popover placement='right-end' offset={[20,45]} >
                   <PopoverTrigger>
                     <Box>
-                      <Box gap="2px" w="100px" alignItems="center" >
-                        <Button size="md" bgColor='rgb(51, 60, 74)' w="125px" marginLeft="0.2rem" >
+                      <Box gap="2px" w="130px" alignItems="center" >
+                        <Button size="md" px={9} py="1" bgColor='rgb(51, 60, 74)' w="160px" marginLeft="0.2rem" >
                           <Text fontSize="small" color="white" fontFamily="sans-serif">
                             Javascript
                           </Text>
                         </Button>
                       </Box>
-                      <Box marginLeft="40px">
+                      <Box marginLeft="55px">
                         <PlainIcon w="30px" h="40px" fontWeight="lighter" />
                       </Box>
                     </Box>
@@ -311,7 +314,7 @@ export default function FrontendRoadmap() {
                           }}
                         />
                         <Link to={`/frontend/${course.name}`} >
-                          <Button size="md" bgColor='rgb(51, 60, 74)' w="125px" onClick={() => handleResouce(course)}>
+                          <Button size="md" px={9} py="1" bgColor='rgb(51, 60, 74)' w="160px" onClick={() => handleResouce(course)}>
                             <Text fontSize="small" color="white" fontFamily="sans-serif">
                               {course.name}
                             </Text>
