@@ -1,35 +1,39 @@
-import { useContext } from "react";
+// useSignup.js
+
+import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from 'react-router-dom';
 
 export const useSignup = () => {
-    const { setUserData } = useContext(AuthContext);
-    const navigate = useNavigate();
+  const { setUserData } = useContext(AuthContext);
+  const [error, setError] = React.useState(null);
+  const navigate = useNavigate();
 
-    const signup = async (email, password) => {
-        try { 
-            const response = await fetch('/api/user/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
+  const signup = async (email, password) => {
+    setError(null);
 
-            if (response.ok) {
-                const userData = await response.json();
-                setUserData(userData);
-                console.log(userData);
-                 
-                localStorage.setItem('user', JSON.stringify(userData));
-                navigate('/');
-            } else {
-                console.error('Signup failed');
-            }
-        } catch (error) {
-            console.error('Error during signup:', error);
-        }
-    };
+    try {
+      const response = await fetch('/api/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
 
-    return { signup };
+      if (response.ok) {
+        const userData = await response.json();
+        setUserData(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        navigate('/');
+      } else {
+        const json = await response.json();
+        setError(json.message); // Assuming error messages are returned as 'message' from the backend.
+      }
+    } catch (error) {
+      setError('An error occurred while signing up.');
+    }
+  };
+
+  return { signup, error };
 };

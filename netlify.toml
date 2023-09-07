@@ -1,16 +1,16 @@
 [[redirects]]
 from = "/api/user/login"
-to = "https://fullstack-snei.onrender.com/api/user/login"
+to = "https://finalone-hi7z.onrender.com/api/user/login"
 
 [[redirects]]
-from = "/api/user/signin"
-to = "https://fullstack-snei.onrender.com/api/user/signin"
+from = "/api/user/signup"
+to = "https://finalone-hi7z.onrender.com/api/user/signup"
 
 [[redirects]]
 from = "/api/*"
-to = "https://fullstack-snei.onrender.com/api/:splat"
+to = "https://finalone-hi7z.onrender.com/api/:splat"
 
 [[redirects]]
 from = "/*"
-to = "/index.html"
+to = "https://finalone-hi7z.onrender.com/index.html"
 status = 200

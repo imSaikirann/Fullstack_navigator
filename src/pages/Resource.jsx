@@ -13,10 +13,10 @@ import {
   DrawerCloseButton,
   DrawerOverlay
 } from '@chakra-ui/react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import axios from 'axios';
-import { UserContext } from '../Context/UserContext'; 
+import { UserContext } from '../Context/UserContext';
 
 export default function Resource() {
   const { resource } = useContext(UserContext);
@@ -78,13 +78,18 @@ export default function Resource() {
 
   return (
     <Box>
-      <Box padding="1.5rem 1.2rem">
-        <Text fontSize="2rem" fontWeight="700" py={5}>
+    
+      
+      <Box padding="0.1rem 1.2rem" margin="1rem"
+       bgColor="#F4F6F6"
+       borderRadius="12px"
+       >
+        <Text fontSize="2rem" fontWeight="700" py={5} fontStyle="Raleway">
           {resource.name.charAt(0).toUpperCase() + resource.name.slice(1)}
         </Text>
         <Text fontSize="1.1rem" fontWeight="500">{resource.information}</Text>
         <Flex gap="1rem" py="5">
-          <Button as='a' href={resource.youtubeLink}>
+          <Button colorScheme='blue' as='a' href={resource.youtubeLink}>
             Watch on Youtube
           </Button>
           <Button as='a' href={resource.documentationLink}>
@@ -130,15 +135,21 @@ export default function Resource() {
           <Text fontSize="1.7rem" fontWeight="500">Github Projects</Text>
 
           {resource && resource.githubProjects.map((projects, index) => (
-            projects.link && (
-              <Box >
+            projects.link.trim() !== "" && (
+              <Box key={index}>
                 <Button marginTop="1rem" as="a" href={projects.link}>
                   <Text>{projects.text}</Text>
                 </Button>
               </Box>
             )
           ))}
+
+          {resource && resource.githubProjects.every(projects => projects.link.trim() === "") && (
+            <Text fontSize="1.2rem" fontWeight="sm">No Projects</Text>
+          )}
         </Box>
+
+
 
         <Box marginTop="1.2rem" >
           <Text fontSize="1.7rem" fontWeight="500">Website Links</Text>
@@ -150,7 +161,7 @@ export default function Resource() {
           ))}
         </Box>
 
-        <Box marginTop="1.2rem"  bgColor="#C5CCD3" w="90%" borderRadius="10px" padding="1rem" >
+        <Box marginTop="1.2rem" bgColor="#C5CCD3" w="90%" borderRadius="10px" padding="1rem" >
           <Text fontSize="1.7rem" fontWeight="500">Interview Questions</Text>
           {resource && resource.questions.map((question, index) => (
             <Box key={index}>

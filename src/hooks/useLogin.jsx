@@ -1,14 +1,15 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from "../Context/UserContext";
 
 export const useLogin = () => {
-  const navigate = useNavigate();
-  const { route } = useContext(UserContext);
   const { setUserData } = useContext(AuthContext);
+  const [error, setError] = React.useState(null);
+  const navigate = useNavigate();
 
-  const login = async (email, password, formikActions) => {
+  const login = async (email, password) => {
+    setError(null);
+
     try {
       const response = await fetch('/api/user/login', {
         method: 'POST',
@@ -22,18 +23,15 @@ export const useLogin = () => {
         const userData = await response.json();
         setUserData(userData);
         localStorage.setItem('user', JSON.stringify(userData));
-        formikActions.setSubmitting(false);
-
-        // Call the loginCallback after successful login
-
-        navigate(route);
+        navigate('/');
       } else {
-        console.error('Login failed');
+        const json = await response.json();
+        setError(json.message || 'Login failed');
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      setError('An error occurred while signing in.'); 
     }
   };
 
-  return { login };
+  return { login, error };
 };

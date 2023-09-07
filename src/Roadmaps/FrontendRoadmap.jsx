@@ -38,7 +38,7 @@ export default function FrontendRoadmap() {
   const fetchData = async () => {
     try {
       const timestamp = Date.now();
-      const res = await axios.get(`/api/detailedFrontend?timestamp:${timestamp}`);
+      const res = await axios.get(`/api/detailedFrontend?timestamp=${timestamp}`);
       setSelectedCourse(res.data);
       setLoading(false);
     } catch (error) {
@@ -165,8 +165,8 @@ export default function FrontendRoadmap() {
                           }}
                         />
                         <Link to={`/frontend/${course.name}`} >
-                          <Button size="md" bgColor='rgb(51, 60, 74)' w="125px" onClick={() => handleResouce(course)}>
-                            <Text fontSize="small" color="white" fontFamily="sans-serif">
+                          <Button size="md" bgColor='rgb(51, 60, 74)' _hover={{color:"#000000"}} w="125px" onClick={() => handleResouce(course)}>
+                            <Text fontSize="0.9rem" color="white" fontFamily="sans-serif">
                               {course.name}
                             </Text>
                           </Button>
