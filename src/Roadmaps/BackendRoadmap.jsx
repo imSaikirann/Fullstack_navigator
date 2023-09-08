@@ -33,7 +33,7 @@ export default function BackendRoadmap() {
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate()
 
-  //fetching roamdmap
+  
   const fetchData = async () => {
     try {
       const timestamp = Date.now();

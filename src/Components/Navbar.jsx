@@ -41,8 +41,8 @@ export default function Navbar() {
     setIsDrawerOpen(false);
   };
 
-  const progressValue = ((userData?.Data?.completedLanguages.length) / 40) * 100 || 0;
-  const bprogressValue = ((userData?.Data?.bcompletedLanguages.length) / 40) * 100 || 0;
+  const progressValue =Math.round(((userData?.Data?.completedLanguages.length) / 55) * 100) || 0;
+  const bprogressValue =Math.round (((userData?.Data?.bcompletedLanguages.length) / 40) * 100) || 0;
 
   return (
     <Flex

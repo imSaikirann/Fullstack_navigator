@@ -28,9 +28,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/frontend' element={<FrontendRoadmap />} />
             <Route path='/backend' element={<BackendRoadmap />} />
-
             <Route path={`/backend/${resource && resource.name}`} element={<Bresource/>} />
-
             <Route path='/login' element={<Loginpage />} />
             <Route path='/Signup' element={<Signup />} />
             <Route path={`/frontend/${resource && resource.name}`} element={<Resource />} />

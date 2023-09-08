@@ -49,7 +49,7 @@ export default function FrontendRoadmap() {
   });
 
   // Update progress bar value
-  const progressValue = Math.round(((userData?.Data?.completedLanguages.length) / 59) * 100) || 0;
+  const progressValue = Math.round(((userData?.Data?.completedLanguages.length) / 55) * 100) || 0;
   setProgress(progressValue); 
 
   const isCourseCompleted = (courseName) => {
