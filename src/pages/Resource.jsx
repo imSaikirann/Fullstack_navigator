@@ -75,58 +75,67 @@ export default function Resource() {
 
   return (
     <Box>
-      <Box >
-        <Box padding="1rem">
-        <Text fontSize="2rem" fontWeight="700" py={5} fontStyle="Raleway">
-          {resource.name.charAt(0).toUpperCase() + resource.name.slice(1)}
-        </Text>
-        <Text fontSize="1.1rem" fontWeight="500" fontStyle="Raleway">{resource.information}</Text>
-        <Flex gap="1rem" py="5">
-          <Button colorScheme='blue' as='a' href={resource.youtubeLink}>
-            Watch on Youtube
-          </Button>
-          <Button as='a' href={resource.documentationLink}>
-            Documentation
-          </Button>
-        </Flex>
+      <Box>
+        <Box padding={['1rem', '2rem', '2rem']}  >
+          <Text fontSize={['1.5rem', '2rem', '2rem']} fontWeight="700" py={5} fontStyle="Raleway">
+            {resource.name.charAt(0).toUpperCase() + resource.name.slice(1)}
+          </Text>
+          <Text fontSize={['1rem', '1.1rem', '1.1rem']} fontWeight="500" fontStyle="Raleway">
+            {resource.information}
+          </Text>
+          <Flex flexWrap="wrap" gap="1rem" py="5">
+            <Button colorScheme='blue' as='a' href={resource.youtubeLink}>
+              Watch on Youtube
+            </Button>
+            <Button as='a' href={resource.documentationLink}>
+              Documentation
+            </Button>
+          </Flex>
         </Box>
 
-        <Box  padding="1rem">
-        <Text fontSize="1.7rem" fontWeight="500">Topics</Text>
-        <SimpleGrid columns={4} spacing={5} py={5}>
-          {resource &&
-            resource.topics &&
-            resource.topics.map((res, index) => (
-              <Box key={index}>
-                <Box display="flex" gap="1rem">
-                  <Checkbox
-                    borderColor="#555555"
-                    size="lg"
-                    isChecked={isCourseCompleted(res.topicName)}
-                    onChange={() => {
-                      if (userData) {
-                        handleCheckboxChange(res.topicName);
-                      } else {
-                        handleNavigate();
-                      }
-                    }}
-                  />
-                  <Button
-                    w="100%"
-                    onClick={() => {
-                      onOpenDrawer(res);
-                    }}
+        <Box padding={['1rem', '2rem', '2rem']}>
+          <Text fontSize={['1.2rem', '1.5rem', '1.7rem']} fontWeight="500"  >Topics</Text>
+          <SimpleGrid columns={[1, 2, 4]} spacing={['1rem', '1rem', '2rem']} py={5}>
+            {resource &&
+              resource.topics &&
+              resource.topics.map((res, index) => (
+                <Box key={index}>
+                  <Flex
+                    flexDirection={['column', 'column', 'row']}
+                    alignItems={['start', 'start', 'center']}
+                    gap="1rem"
+                    justifyContent="space-between"
                   >
-                    {res.topicName}
-                  </Button>
+                    <Flex alignItems="center" gap="0.5rem">
+                      <Checkbox
+                        borderColor="#555555"
+                        size="lg"
+                        isChecked={isCourseCompleted(res.topicName)}
+                        onChange={() => {
+                          if (userData) {
+                            handleCheckboxChange(res.topicName);
+                          } else {
+                            handleNavigate();
+                          }
+                        }}
+                      />
+                      <Button
+                        w={['100%', '100%', 'auto']}
+                        onClick={() => {
+                          onOpenDrawer(res);
+                        }}
+                      >
+                        {res.topicName}
+                      </Button>
+                    </Flex>
+                  </Flex>
                 </Box>
-              </Box>
-            ))}
-        </SimpleGrid>
+              ))}
+          </SimpleGrid>
         </Box>
 
-        <Box padding="1rem">
-          <Text fontSize="1.7rem" fontWeight="500" marginBottom="15px">Github Projects</Text>
+        <Box padding={['1rem', '2rem', '2rem']}>
+          <Text fontSize={['1.5rem', '1.7rem', '1.7rem']} fontWeight="500" marginBottom="15px"  >Github Projects</Text>
 
           {resource && resource.githubProjects.map((projects, index) => (
             projects.link.trim() !== "" && (
@@ -139,25 +148,25 @@ export default function Resource() {
           ))}
 
           {resource && resource.githubProjects.every(projects => projects.link.trim() === "") && (
-            <Text fontSize="1.2rem" fontWeight="sm">No Projects</Text>
+            <Text fontSize={['1.2rem', '1.2rem', '1.2rem']} fontWeight="sm"  >No Projects</Text>
           )}
         </Box>
 
-        <Box marginTop="1.2rem" padding="1rem">
-          <Text fontSize="1.7rem" fontWeight="500" marginBottom="15px">Website Links</Text>
+        <Box marginTop="1.2rem" padding={['1rem', '1rem', '2rem']}>
+          <Text fontSize={['1.5rem', '1.7rem', '1.7rem']} fontWeight="500" marginBottom="15px"  >Website Links</Text>
 
           {resource && resource.articles.map((article, index) => (
             <Box key={index}>
-              <Text as="a" marginTop="1rem" href={article.link} textDecoration="underline">{article.text}</Text>
+              <Text as="a" marginTop="1rem" href={article.link} textDecoration="underline"  >{article.text}</Text>
             </Box>
           ))}
         </Box>
 
-        <Box  bgColor="#F0F2F3" w="98%" margin="1rem" marginRight="1rem" borderRadius="10px" padding="1rem">
-          <Text fontSize="1.7rem" fontWeight="500" marginBottom="15px">Interview Questions</Text>
+        <Box bgColor="#F0F2F3" w={['95%', '98%', '98%']} margin="1rem" marginRight={['1rem', '1rem', '0']} borderRadius="10px" padding={['1rem', '1rem', '2rem']}>
+          <Text fontSize={['1.5rem', '1.7rem', '1.7rem']} fontWeight="500" marginBottom="15px"  >Interview Questions</Text>
           {resource && resource.questions.map((question, index) => (
             <Box key={index}>
-              <Text fontSize="1.1rem" >{question.text}</Text>
+              <Text fontSize={['1rem', '1.1rem', '1.1rem']}  >{question.text}</Text>
               {index < resource.questions.length - 1 && <Divider borderColor="#00000" my="0.5rem" />}
             </Box>
           ))}
@@ -171,24 +180,23 @@ export default function Resource() {
           <DrawerBody>
             {selectedTopic && (
               <>
-                <Text fontSize="1.8rem" fontWeight="700" py="3">
+                <Text fontSize={['1.7rem', '1.8rem', '1.8rem']} fontWeight="700" py="3"  >
                   {selectedTopic.topicName}
                 </Text>
-                <Text fontSize="1rem" fontWeight="500" py="3">
+                <Text fontSize={['0.9rem', '1rem', '1rem']} fontWeight="500" py="3"  >
                   {selectedTopic.information}
                 </Text>
                 <Box py="2">
                   <Button><Text as="a" href={selectedTopic.youtubeLink}>Watch on Youtube</Text></Button>
                 </Box>
                 <Box py="5">
-                  <Text as="a" href={selectedTopic.article.link} textDecoration="underline" >
+                  <Text as="a" href={selectedTopic.article.link} textDecoration="underline"  >
                     {selectedTopic.article.text}
                   </Text>
                 </Box>
               </>
             )}
           </DrawerBody>
-  
         </DrawerContent>
       </Drawer>
     </Box>

@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
-  Card,
   Input,
-  Center,
-  CardBody,
-  CardFooter,
   Box,
-  Image,
+  Spinner,
+  SimpleGrid,
+  Stack,
   Button,
-  Divider,
+  Image,
+  Center,
   Heading,
   Text,
-  Stack,
-  ButtonGroup,
-  Spinner,
   Flex,
-  SimpleGrid,
+  Divider,
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
 } from '@chakra-ui/react';
 
 export default function DeveloperTools() {
@@ -30,7 +30,7 @@ export default function DeveloperTools() {
       try {
         const response = await axios.get('/api/devtools');
         setTools(response.data);
-        setFilteredTools(response.data)
+        setFilteredTools(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -52,10 +52,10 @@ export default function DeveloperTools() {
   };
 
   return (
-    <Box className='home' padding='1rem'>
-      <Box p='1rem'>
+    <Box className='home' padding={['0.5rem', '1rem']}>
+      <Box p={['0.5rem', '1rem']}>
         <Input
-          w='500px'
+          w={['100%', '500px']}
           h='45px'
           focusBorderColor='transparent'
           bgColor='#F0F2F3'
@@ -68,37 +68,37 @@ export default function DeveloperTools() {
         {loading ? (
           <Spinner size='lg' />
         ) : (
-          <SimpleGrid columns={4} spacing={4} px='1rem'>
+          <SimpleGrid columns={[1, 2, 3, 4]} spacing={['1rem', '2rem']} px={['0.5rem', '1rem']}>
             {filteredTools.map((tool, index) => (
-                    <Card key={index} maxW='sm' padding='1rem' 
-                    
-                    >
+              <Card key={index} maxW='sm' padding={['0.5rem', '1rem']}>
                 <CardBody>
                   <Flex justify='center'>
                     <Image
                       src={tool.image}
                       alt='Tool Icon'
                       borderRadius='lg'
-                      h='50%'
+                      h={['80px', '100px']}
                       objectFit='cover'
-                      w='50%'
-                    /> 
+                      w={['80px', '100px']}
+                    />
                   </Flex>
-                  <Stack mt='6' 
-                  spacing='3'
-                   h='160px'
-                    overflow='hidden'>
-                    <Heading size='md' color="#1A191E">{tool.toolname}</Heading>
-                    <Text 
-                    fontSize="14px"
-                    textOverflow='ellipsis'>{tool.information}</Text>
+                  <Stack mt='6' spacing='3' h={['auto', '160px']} overflow='hidden'>
+                    <Heading size='md' color='#1A191E'>
+                      {tool.toolname}
+                    </Heading>
+                    <Text fontSize={['12px', '14px']} textOverflow='ellipsis'>
+                      {tool.information}
+                    </Text>
                   </Stack>
                 </CardBody>
                 <Divider />
                 <CardFooter>
                   <ButtonGroup spacing='2'>
-                    <Button variant='solid' 
-                    bgColor="#1A191E" _hover={{style:"#1A191E"} } color="whiteAlpha.900"
+                    <Button
+                      variant='solid'
+                      bgColor='#1A191E'
+                      _hover={{ style: '#1A191E' }}
+                      color='whiteAlpha.900'
                     >
                       <a href={tool.link}>Download</a>
                     </Button>
