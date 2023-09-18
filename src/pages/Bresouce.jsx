@@ -18,7 +18,7 @@ import { AuthContext } from '../Context/AuthContext';
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 
-export default function Resource() {
+export default function Bresource() {
   const { resource } = useContext(UserContext);
   const { userData, setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -34,35 +34,35 @@ export default function Resource() {
 
   const isCourseCompleted = (topicName) => {
     if (userData && userData.user && userData.user._id) {
-      return userData.Data?.completedLanguages?.includes(topicName) || false;
+      return userData.Data?.bcompletedLanguages?.includes(topicName) || false;
     }
     return false;
   };
-
+ 
   const handleCheckboxChange = async (topicName) => {
     try {
-      const updatedCompletedLanguages = [...userData.Data.completedLanguages];
+      const updatedbcompletedLanguages = [...userData.Data.bcompletedLanguages];
 
       if (isCourseCompleted(topicName)) {
-        const index = updatedCompletedLanguages.indexOf(topicName);
+        const index = updatedbcompletedLanguages.indexOf(topicName);
         if (index !== -1) {
-          updatedCompletedLanguages.splice(index, 1);
+          updatedbcompletedLanguages.splice(index, 1);
         }
       } else {
-        updatedCompletedLanguages.push(topicName);
+        updatedbcompletedLanguages.push(topicName);
       }
 
       const updatedUserData = {
         ...userData,
         Data: {
           ...userData.Data,
-          completedLanguages: updatedCompletedLanguages,
+          bcompletedLanguages: updatedbcompletedLanguages,
         },
       };
       setUserData(updatedUserData);
 
       await axios.patch(`/api/updateCheckbox/${userData.user._id}`, {
-        completedLanguages: updatedCompletedLanguages,
+        bcompletedLanguages: updatedbcompletedLanguages,
       });
     } catch (error) {
       console.log(error);
